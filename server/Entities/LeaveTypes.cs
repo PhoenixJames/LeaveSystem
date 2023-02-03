@@ -10,7 +10,7 @@ namespace LeaveSystem.Entities {
     public long Id { get; set; }
 
     [Column("Type")]
-    public long Type { get; set; }
+    public string Type { get; set; }
     
     [Column("createddate")]
     public DateTime CreatedDate {get; set;}

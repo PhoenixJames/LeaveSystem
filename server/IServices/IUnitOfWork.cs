@@ -3,5 +3,7 @@ namespace LeaveSystem.IServices {
     
     IEmployeeServices EmployeeServices { get;}
 
+    ILeaveServices LeaveServices { get; }
+
   }
 }

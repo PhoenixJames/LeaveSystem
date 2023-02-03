@@ -31,6 +31,29 @@ namespace LeaveSystem.Entities
                 optionsBuilder.UseMySql("ConnectionStrings : DefaultConnection", serverVersion);
             }
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<LeaveTypes>().HasData(
+                new LeaveTypes {
+                    Id = 1,
+                    Type = "Casual Leave",
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow,
+                },
+                new LeaveTypes {
+                    Id = 2,
+                    Type = "Medical Leave",
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow,
+                },
+                new LeaveTypes {
+                    Id = 3,
+                    Type = "Earned Leave",
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow,
+                }
+            );
+
+        }
 
     }
 }

@@ -22,6 +22,8 @@ namespace LeaveSystem.Services {
     public IEmployeeServices EmployeeServices =>
       new EmployeeServices(_context);
 
+    public ILeaveServices LeaveServices =>
+      new LeaveServices(_context);
   }
 
 
