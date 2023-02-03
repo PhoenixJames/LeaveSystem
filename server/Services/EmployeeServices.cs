@@ -21,18 +21,44 @@ namespace LeaveSystem.Services {
     
     public async Task<ApiResponse> EmployeeRegister (EmployeeRegisterModel model) {
       
-      return new ApiResponse("success", 200);
+      try {
+        Employee NewEmployee = new () {
+          Name = model.Name,
+          DOB = model.DOB,
+          Position = model.Position,
+          CreatedDate = DateTime.Now
+        };
+        await _context.AddAsync(NewEmployee);
+        await _context.SaveChangesAsync();
 
+        return new ApiResponse("Employee Create Successful", 200);
+        
+      } catch (InvalidCastException e) {
+        return new ApiResponse(e.Message, 400);
+      }
     }
 
-    public async Task<ServiceResponse<EmployeeViewModel>> GetAllEmployee() {
-      var result = new EmployeeViewModel{
-        Id = 1,
-        Name = "Ko Ko",
-        DOB = DateTime.Now,
-        Position = "Manager"
-      };
-      return new ServiceResponse<EmployeeViewModel>(200, "success", result);
+    public async Task<ServiceResponse<List<EmployeeViewModel>>> GetAllEmployee() {
+      List<EmployeeViewModel> result;
+      try {
+
+        result = await _context
+          .Employee
+          .Select(x => new EmployeeViewModel {
+            Id = x.Id,
+            Name = x.Name,
+            DOB = x.DOB,
+            Position = x.Position
+          })
+          .ToListAsync();
+        
+        return new ServiceResponse<List<EmployeeViewModel>>(200, "Success", result);
+
+      } catch (InvalidCastException e) {
+
+        return new ServiceResponse<List<EmployeeViewModel>>(400, e.Message, null);
+
+      }
 
     }
 

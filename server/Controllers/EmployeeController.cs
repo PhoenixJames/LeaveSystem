@@ -23,7 +23,7 @@ namespace LeaveSystem.Controllers {
     } 
 
     [HttpGet("[action]")]
-    public async Task<ServiceResponse<EmployeeViewModel>> GetAllEmployee() {
+    public async Task<ServiceResponse<List<EmployeeViewModel>>> GetAllEmployee() {
 
       var result = await _unitOfWork.EmployeeServices.GetAllEmployee();
       return result;

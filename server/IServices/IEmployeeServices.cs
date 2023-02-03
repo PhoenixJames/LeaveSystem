@@ -6,7 +6,7 @@ namespace LeaveSystem.IServices {
 
     Task<ApiResponse> EmployeeRegister (EmployeeRegisterModel model);
     
-    Task<ServiceResponse<EmployeeViewModel>> GetAllEmployee();
+    Task<ServiceResponse<List<EmployeeViewModel>>> GetAllEmployee();
 
   }
 
