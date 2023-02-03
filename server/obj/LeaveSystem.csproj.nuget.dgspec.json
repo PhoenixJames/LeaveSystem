@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/phoenix/Projects/LeaveSystem/LeaveSystem.csproj": {}
+    "/home/phoenix/Projects/LeaveSystemMaster/server/LeaveSystem.csproj": {}
   },
   "projects": {
-    "/home/phoenix/Projects/LeaveSystem/LeaveSystem.csproj": {
+    "/home/phoenix/Projects/LeaveSystemMaster/server/LeaveSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/phoenix/Projects/LeaveSystem/LeaveSystem.csproj",
+        "projectUniqueName": "/home/phoenix/Projects/LeaveSystemMaster/server/LeaveSystem.csproj",
         "projectName": "LeaveSystem",
-        "projectPath": "/home/phoenix/Projects/LeaveSystem/LeaveSystem.csproj",
+        "projectPath": "/home/phoenix/Projects/LeaveSystemMaster/server/LeaveSystem.csproj",
         "packagesPath": "/home/phoenix/.nuget/packages/",
-        "outputPath": "/home/phoenix/Projects/LeaveSystem/obj/",
+        "outputPath": "/home/phoenix/Projects/LeaveSystemMaster/server/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/phoenix/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -60,7 +64,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
