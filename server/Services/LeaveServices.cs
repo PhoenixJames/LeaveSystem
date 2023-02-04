@@ -9,20 +9,22 @@ namespace LeaveSystem.Services {
 
     private readonly LeaveSystemContext _context;
 
-    public LeaveServices(LeaveSystemContext context) {
+    private readonly IUtilityServices _util;
+
+    public LeaveServices(LeaveSystemContext context, IUtilityServices util) {
       
       _context = context;
+      _util = util;
   
-    }
-    public IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
-    {
-      for(var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))
-        yield return day;
     }
     
     public async Task<ApiResponse> ApplyLeave (LeaveApplyModel model) {
       
       try {
+        var isValid = _util.IsValidLeave(model);
+        if(!isValid.Result) {
+          return new ApiResponse(isValid.Message, 400);
+        }
         Leave NewLeave = new () {
           LeaveTypeId = model.LeaveTypeId,
           EmployeeId = model.EmployeeId,
@@ -34,7 +36,7 @@ namespace LeaveSystem.Services {
         await _context.AddAsync(NewLeave);
         await _context.SaveChangesAsync();
 
-        foreach (DateTime day in EachDay(model.FromDate, model.ToDate)) {
+        foreach (DateTime day in _util.EachDay(model.FromDate, model.ToDate)) {
           if ((day.DayOfWeek != DayOfWeek.Saturday) && (day.DayOfWeek != DayOfWeek.Sunday))
           {
             LeaveDetail NewLeaveDetail = new () {
@@ -60,7 +62,6 @@ namespace LeaveSystem.Services {
     public async Task<ServiceResponse<List<LeaveViewModel>>> GetAllLeave() {
       List<LeaveViewModel> result;
       try {
-
         result = await _context
           .Leave
           .Select(x => new LeaveViewModel {

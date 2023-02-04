@@ -5,5 +5,7 @@ namespace LeaveSystem.IServices {
 
     ILeaveServices LeaveServices { get; }
 
+    IUtilityServices UtilityServices { get; }
+
   }
 }

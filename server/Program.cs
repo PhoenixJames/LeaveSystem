@@ -21,7 +21,10 @@ builder.Services.AddDbContext<LeaveSystemContext>(
           .EnableSensitiveDataLogging() // <-- These two calls are optional but help
           .EnableDetailedErrors()
 );
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddRazorPages();
 
+builder.Services.AddTransient<IUtilityServices, UtilityServices>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();

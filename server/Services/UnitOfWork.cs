@@ -14,8 +14,13 @@ namespace LeaveSystem.Services {
   
     private readonly LeaveSystemContext _context;
 
-    public UnitOfWork(LeaveSystemContext context) {
+    private readonly IUtilityServices _util;
+    
+    public UnitOfWork(LeaveSystemContext context,
+                      IUtilityServices util
+    ) {
       _context = context;
+      _util = util;
     }
 
 
@@ -23,7 +28,11 @@ namespace LeaveSystem.Services {
       new EmployeeServices(_context);
 
     public ILeaveServices LeaveServices =>
-      new LeaveServices(_context);
+      new LeaveServices(_context, _util);
+    
+    public IUtilityServices UtilityServices =>
+      new UtilityServices(_context);
+
   }
 
 
