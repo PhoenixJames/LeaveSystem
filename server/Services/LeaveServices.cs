@@ -28,8 +28,8 @@ namespace LeaveSystem.Services {
         Leave NewLeave = new () {
           LeaveTypeId = model.LeaveTypeId,
           EmployeeId = model.EmployeeId,
-          FromDate = model.FromDate,
-          ToDate = model.ToDate,
+          FromDate = model.FromDate.Date,
+          ToDate = model.ToDate.Date,
           Duration = model.Duration,
           CreatedDate = DateTime.Now
         };

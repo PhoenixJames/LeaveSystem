@@ -1,3 +1,4 @@
+using System.Data;
 using Microsoft.EntityFrameworkCore;
 using LeaveSystem.Entities;
 using LeaveSystem.IServices;
@@ -23,8 +24,16 @@ namespace LeaveSystem.Services {
     }
 
     public ValidatorModel IsValidLeave (LeaveApplyModel model) {
-      
-      return new ValidatorModel(false, "Invalid");
+      if (model.FromDate.Date < DateTime.Now.Date) {
+        return new ValidatorModel(false, "Cannot apply the past days.");
+      }
+      var appliedDates = _context.LeaveDetail
+        .Where(x => x.EmployeeId == model.EmployeeId && x.Date.Date >= model.FromDate.Date)
+        .ToList();
+      if (appliedDates.Count > 0) {
+        return new ValidatorModel(false, "The dates are already applied.");
+      }
+      return new ValidatorModel(true, "Valid");
     }
 
   }
