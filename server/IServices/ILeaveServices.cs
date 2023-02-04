@@ -8,6 +8,7 @@ namespace LeaveSystem.IServices {
     
     Task<ServiceResponse<List<LeaveViewModel>>> GetAllLeave();
 
+    Task<ServiceResponse<List<LeaveDetailViewModel>>> GetLeaveDetailByEmpId(long id);
   }
 
 }

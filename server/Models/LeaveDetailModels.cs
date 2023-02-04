@@ -7,7 +7,7 @@ namespace LeaveSystem.Models {
 
   public class LeaveDetailViewModel {
     [JsonProperty("id")]
-    public long id { get; set; }
+    public long Id { get; set; }
 
     [JsonProperty("leaveTypeId")]
     public long LeaveTypeId { get; set; }

@@ -30,6 +30,14 @@ namespace LeaveSystem.Controllers {
 
     } 
 
+    [HttpGet("[action]")]
+    public async Task<ServiceResponse<List<LeaveDetailViewModel>>> GetLeaveDetailByEmpId(long id) {
+
+      var result = await _unitOfWork.LeaveServices.GetLeaveDetailByEmpId(id);
+      return result;
+
+    } 
+
   }
 
 }

@@ -83,6 +83,31 @@ namespace LeaveSystem.Services {
 
     }
     
+    public async Task<ServiceResponse<List<LeaveDetailViewModel>>> GetLeaveDetailByEmpId(long id) {
+      List<LeaveDetailViewModel> result;
+      try {
+
+        result = await _context
+          .LeaveDetail
+          .Select(x => new LeaveDetailViewModel {
+            Id = x.Id,
+            LeaveTypeId = x.LeaveTypeId,
+            EmployeeId = x.EmployeeId,
+            Date = x.Date
+          })
+          .Where(x => x.EmployeeId == id)
+          .ToListAsync();
+        
+        return new ServiceResponse<List<LeaveDetailViewModel>>(200, "Success", result);
+
+      } catch (InvalidCastException e) {
+
+        return new ServiceResponse<List<LeaveDetailViewModel>>(400, e.Message, null);
+
+      }
+
+    }
+
   }
 
 }
